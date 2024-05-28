@@ -1,0 +1,80 @@
+[
+  {
+    "id": 3,
+    "customerId": 3235556895,
+    "name": "Sachin",
+    "family": "Tendulkar",
+    "email": "2",
+    "mobile": "3",
+    "city": 120,
+    "address": "Address1",
+    "zipCode": "null",
+    "nationalId": "34",
+    "birthDate": 13101115
+  },
+  {
+    "id": 4,
+    "customerId": 3231156891,
+    "name": "Barak",
+    "family": "Obama",
+    "email": "2",
+    "mobile": "3",
+    "city": 56,
+    "address": "Address2",
+    "zipCode": "null",
+    "nationalId": "67854",
+    "birthDate": 13701201
+  },
+  {
+    "id": 5,
+    "customerId": 3232256892,
+    "name": "Donald",
+    "family": "Trump",
+    "email": "2",
+    "mobile": "3",
+    "city": 4,
+    "address": "Address3",
+    "zipCode": "null",
+    "nationalId": "2544734",
+    "birthDate": 13360225
+  },
+  {
+    "id": 6,
+    "customerId": 3233356893,
+    "name": "Rajeev",
+    "family": "Kumar Singh ♥",
+    "email": "2",
+    "mobile": "3",
+    "city": 98,
+    "address": "Address0",
+    "zipCode": "null",
+    "nationalId": "144405511",
+    "birthDate": 13651212
+  },
+  {
+    "id": 27,
+    "customerId": 3232456888,
+    "name": "Sachin",
+    "family": "Tendulkar",
+    "email": "2",
+    "mobile": "3",
+    "city": 120,
+    "address": "Address1",
+    "zipCode": "null",
+    "nationalId": "34",
+    "birthDate": 13101115
+  },
+  {
+    "id": 27,
+    "customerId": 3232456888,
+    "name": "Sachin",
+    "family": "Tendulkar",
+    "email": "2",
+    "mobile": "3",
+    "city": 120,
+    "address": "Address1",
+    "zipCode": "null",
+    "nationalId": "34",
+    "birthDate": 13101115
+  }
+]

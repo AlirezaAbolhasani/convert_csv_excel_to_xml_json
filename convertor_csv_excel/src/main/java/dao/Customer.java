@@ -2,6 +2,9 @@ package dao;
 
 import common.MessageUtils;
 import common.exceptions.BusinessException;
+import lombok.Cleanup;
+import lombok.Data;
+import lombok.NonNull;
 import org.apache.log4j.Logger;
 
 /**
@@ -11,6 +14,7 @@ import org.apache.log4j.Logger;
  **/
 
 public class Customer {
+
     final static Logger logger = Logger.getLogger(Customer.class.getName());
     private Long id;
     private Long    customerId;

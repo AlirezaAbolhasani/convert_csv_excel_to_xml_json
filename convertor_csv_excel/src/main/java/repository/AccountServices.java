@@ -65,7 +65,7 @@ public class AccountServices {
     /**
      * @param
      * @return accountList
-     * This method get all data from Account Table as a list with JPA provider
+     * This method get all data from Account Table as a list with JDBC provider
      */
     public List<Account> getAllRecordWithJDBC(){
         Statement statement;
@@ -75,11 +75,9 @@ public class AccountServices {
             Class.forName(resourceBundle.getString("MYSQL_DB_URL"));
             connection = SingletonBuilder.getSingletonConnection();
             statement = connection.createStatement();
-            int size;
             String str = "SELECT * FROM easyappartment.account ;";
             ResultSet resultSet = statement.executeQuery(str);
             accountList = getAccountListFromAResultSet(resultSet);
-
         }catch (SQLException | BusinessException | ClassNotFoundException e){
             e.printStackTrace();
             logger.warn(e.getMessage());
@@ -90,7 +88,7 @@ public class AccountServices {
     /** Hikari
      * @param
      * @return accountList
-     * This method get all data in Account Table as a list with Hikari JDBC provider
+     * This method get all data in Account Table as a list with Hikari Hikari provider
      */
     public List<Account> getAllRecordWithHikari(){
         ResultSet resultSet ;
@@ -98,8 +96,6 @@ public class AccountServices {
         try {
             DataSource dataSource = HikariCPBuilder.getInstance();
             connection = dataSource.getConnection();
-            int size;
-            Account account1 = new Account();
             preparedStatement = connection.prepareStatement("SELECT * FROM easyappartment.account ;");
             resultSet = preparedStatement.executeQuery();
             accountList = getAccountListFromAResultSet(resultSet);
@@ -159,10 +155,11 @@ public class AccountServices {
  * **/
     private List<Account> getAccountListFromAResultSet(ResultSet resultSet) throws SQLException, BusinessException {
 
-        Account account = new Account();
+        Account account ;
         List<Account> accountList = new ArrayList<>();
         if (resultSet != null) {
             while (resultSet.next()) {
+                account = new Account();
                 account.setId(Long.parseLong(resultSet.getString(1)));
                 account.setAccNo(Long.parseLong(resultSet.getString(2)));
                 account.setCustomerId(Long.parseLong(resultSet.getString(3)));
@@ -172,10 +169,10 @@ public class AccountServices {
                 account.setAccountLimit(Short.parseShort(resultSet.getString(7)));
                 account.setIntCustId(Integer.parseInt(resultSet.getString(8)));
                 account.setExtCustId(Integer.parseInt(resultSet.getString(9)));
-            }
-            accountList.add(account);
-        }
 
+                accountList.add(account);
+            }
+        }
         return accountList;
     }
 

@@ -65,7 +65,7 @@ public class CustomerServices {
     /**
      * @param
      * @return customerList
-     * This method get all data from customer Table as a list with JPA provider
+     * This method get all data from customer Table as a list with JDBC provider
      */
     public List<Customer> getAllRecordWithJDBC(){
         Statement statement;
@@ -75,11 +75,9 @@ public class CustomerServices {
             Class.forName(resourceBundle.getString("MYSQL_DB_URL"));
             connection = SingletonBuilder.getSingletonConnection();
             statement = connection.createStatement();
-            int size;
             String str = "SELECT * FROM easyappartment.customer ;";
             ResultSet resultSet = statement.executeQuery(str);
             customerList = getCustomerListFromAResultSet(resultSet);
-
         }catch (SQLException | BusinessException | ClassNotFoundException e){
             e.printStackTrace();
             logger.warn(e.getMessage());
@@ -155,29 +153,28 @@ public class CustomerServices {
      * @return List<Account>
      *     Get a Resultset as a parameter and with a while change it to a List of Customer
      * **/
-    private List<Customer> getCustomerListFromAResultSet(ResultSet resultSet) throws SQLException, BusinessException {
+    public List<Customer> getCustomerListFromAResultSet(ResultSet resultSet) throws SQLException, BusinessException {
 
-        Customer customer = new Customer();
+        Customer customer ;
         List<Customer> customerList = new ArrayList<>();
         if (resultSet != null) {
             while (resultSet.next()) {
+                customer = new Customer();
                 customer.setId(Long.parseLong(resultSet.getString(1)));
-                customer.setCustomerId(Long.parseLong(resultSet.getString(2)));
-                customer.setCity(Integer.parseInt(resultSet.getString(3)));
-                customer.setName(String.valueOf(resultSet.getString(4)));
-                customer.setFamily(String.valueOf(resultSet.getString(5)));
-                customer.setEmail(String.valueOf(resultSet.getString(6)));
-                customer.setMobile(String.valueOf(resultSet.getString(7)));
-                customer.setBirthDate(Integer.parseInt(resultSet.getString(8)));
-                customer.setNationalId(String.valueOf(resultSet.getString(9)));
-                customer.setZipCode(String.valueOf(resultSet.getString(10)));
-                customer.setAddress(String.valueOf(resultSet.getString(11)));
+                customer.setCustomerId(Long.parseLong(resultSet.getString(2) == null ? "0" : resultSet.getString(2)));
+                customer.setCity(Integer.parseInt(resultSet.getString(3) == null ? "0" : resultSet.getString(3)));
+                customer.setName(String.valueOf(resultSet.getString(4) == null ? " " : resultSet.getString(4)));
+                customer.setFamily(String.valueOf(resultSet.getString(5) == null ? " " : resultSet.getString(5)));
+                customer.setEmail(String.valueOf(resultSet.getString(6) == null ? " " : resultSet.getString(6)));
+                customer.setMobile(String.valueOf(resultSet.getString(7) == null ? " " : resultSet.getString(7)));
+                customer.setBirthDate(Integer.parseInt(resultSet.getString(8) == null ? "0" : resultSet.getString(8)));
+                customer.setNationalId(String.valueOf(resultSet.getString(9) == null ? "0" : resultSet.getString(9)));
+                customer.setZipCode(String.valueOf(resultSet.getString(10) == null ? " " : resultSet.getString(10)));
+                customer.setAddress(String.valueOf(resultSet.getString(11) == null ? " " : resultSet.getString(11)));
+                customerList.add(customer);
             }
-            customerList.add(customer);
         }
-
         return customerList;
     }
-
 
 }

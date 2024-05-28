@@ -1,8 +1,11 @@
 package dao;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import common.MessageUtils;
 import common.exceptions.BusinessException;
 import common.utility.GeneralHardCodes;
+import lombok.Data;
 import org.apache.log4j.Logger;
 
 import java.util.regex.Matcher;
@@ -14,7 +17,7 @@ import java.util.regex.Pattern;
  * @Time: 3:33 PM
  * @mail: Abolhasany.Alireza@yahoo.com
  **/
-
+@Data
 public class Account {
     final static Logger logger = Logger.getLogger(Account.class.getName());
     private Long    id;
@@ -23,8 +26,8 @@ public class Account {
     private int     accountType;
     private int     openDate;
     private double  balance;
-
     private short   accountLimit;
+
     private int     intCustId;
     private int     extCustId;
 

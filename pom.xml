@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>convertor_csv_excel</module>
-        <module>to_xml_jacson</module>
+        <module>to_xml_json</module>
     </modules>
 
     <properties>
