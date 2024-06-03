@@ -63,7 +63,6 @@ public class CsvCustomer implements FileReaderIMPL,Runnable{
                 customer.setAddress(csvRecord.get(8));
                 customer.setNationalId(csvRecord.get(9));
                 customer.setCity(Integer.parseInt(csvRecord.get(10)));
-
                 customerList.add(customer);
                 try {
                     /**
@@ -75,11 +74,13 @@ public class CsvCustomer implements FileReaderIMPL,Runnable{
                 }
                 // Catch block to handle the exceptions
                 catch (Exception e) {
-                    logger.info("Thread 2 Exception="+e.getMessage());
+                    logger.info("Thread 2 Exception=" + e.getMessage());
+                    e.printStackTrace();
                 }
             }
         }catch (Exception e){
             logger.warn(e.getMessage());
+            e.printStackTrace();
         }
         return customerList;
     }

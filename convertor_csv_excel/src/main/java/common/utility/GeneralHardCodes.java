@@ -10,9 +10,9 @@ package common.utility;
 public class GeneralHardCodes {
 //Addresses
     public static final String SAMPLE_ACCOUNT_CSV_FILE_PATH = "E:\\MyGitProjects\\Java\\Madhaj\\convert_csv_excel_to_xml_json\\convertor_csv_excel\\src\\main\\resources\\users_account.csv";
-    public static final String SAMPLE_CUSTOMER_CSV_FILE_PATH = "E:\\MyGitProjects\\Java\\Madhaj\\convert_csv_excel_to_xml_json\\convertor_csv_excel\\src\\main\\resources\\users_customer.csv";
+    public static final String SAMPLE_CUSTOMER_CSV_FILE_PATH ="E:\\MyGitProjects\\Java\\Madhaj\\convert_csv_excel_to_xml_json\\convertor_csv_excel\\src\\main\\resources\\users_customer.csv";
 
-//Comments
+    //Comments
     public static final String ERROR_CONSOLE_TEMPLATE = "***ERROR******************************";
 
 //Numbers

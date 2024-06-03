@@ -65,10 +65,12 @@ public class CsvAccount implements FileReaderIMPL,Runnable{
                 account.setAccountType(accountType.getIntValue());
                 account.setOpenDate(Integer.parseInt(csvRecord.get(4)));
                 account.setBalance(Float.parseFloat(csvRecord.get(5)));
-                accountList.add((Account) account);
+                accountList.add(account);
                 try {
-                    // Making the thread pause for a certain
-                    // time using sleep() method
+                    /**
+                     * Making the thread pause for a certain
+                     * time using sleep() method
+                     * */
                     Thread.sleep(10);
                     logger.info("Thread 1");
                 }

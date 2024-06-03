@@ -2,35 +2,37 @@ package dao;
 
 import common.MessageUtils;
 import common.exceptions.BusinessException;
-import lombok.Cleanup;
-import lombok.Data;
-import lombok.NonNull;
 import org.apache.log4j.Logger;
+
+import javax.persistence.*;
 
 /**
  * *Developer: ALireza Abolhasani
  * 2/24/2024
  * 3:33 PM
  **/
+@Entity
+@Table(name = "customer")
+
 
 public class Customer {
 
     final static Logger logger = Logger.getLogger(Customer.class.getName());
-    private Long id;
+    @Id
+    private Integer id;
     private Long    customerId;
+    private Integer    city;
     private String name;
     private String family;
     private String email;
     private String mobile;
-    private int    city;
+    private int    birthDate;
+    private String nationalId;
+    private String zipCode;
+    private String address;
     private String country;
     private Short  customerType;
-    private String address;
-    private String zipCode;
-    private String nationalId;
-    private int    birthDate;
-
-
+    
     public Customer() {
     }
 
@@ -63,11 +65,11 @@ public class Customer {
         return logger;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -158,4 +160,5 @@ public class Customer {
     public int getBirthDate() {
         return birthDate;
     }
+
 }

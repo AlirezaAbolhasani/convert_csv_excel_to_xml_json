@@ -30,7 +30,8 @@ public class JointingServices {
         try{
             DataSource dataSource = HikariCPBuilder.getInstance();
             connection = dataSource.getConnection();
-            String sql="SELECT cu.id, cu.customerID, cu.city, cu.name, cu.family, cu.email, cu.mobile, cu.birthDate, cu.nationalId, cu.zipCode, cu.address, ac.balance FROM easyappartment.customer cu LEFT JOIN easyappartment.account ac ON (cu.customerID=ac.customerId) WHERE ac.balance>1000 AND cu.customerID = ac.customerId;";
+            String sql="SELECT DISTINCT(cu.id), cu.customerID, cu.city, cu.name, cu.family, cu.email, cu.mobile, cu.birthDate, cu.nationalId, cu.zipCode, cu.address FROM easyappartment.customer cu " +
+                    "JOIN easyappartment.account ac ON (cu.customerID=ac.customerId) WHERE ac.balance>1000 AND cu.customerID = ac.customerId;";
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             customerList = customerServices.getCustomerListFromAResultSet(resultSet);

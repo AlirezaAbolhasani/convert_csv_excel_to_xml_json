@@ -8,6 +8,10 @@ import common.utility.GeneralHardCodes;
 import lombok.Data;
 import org.apache.log4j.Logger;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,9 +21,12 @@ import java.util.regex.Pattern;
  * @Time: 3:33 PM
  * @mail: Abolhasany.Alireza@yahoo.com
  **/
-@Data
+
+@Entity
+@Table(name="account")
 public class Account {
     final static Logger logger = Logger.getLogger(Account.class.getName());
+    @Id
     private Long    id;
     private Long    accNo;
     private Long    customerId;
@@ -49,7 +56,7 @@ public class Account {
      * @return control account type and should be longer than 0 and smaller than 5
      */
     public void setAccountType(int accountType) throws BusinessException {
-        if(accountType <1 || accountType > 3){
+        if(accountType <1 || accountType > 4){
             throw new BusinessException(MessageUtils.getErrorMessageKey(1000002));
         }
         this.accountType = accountType;

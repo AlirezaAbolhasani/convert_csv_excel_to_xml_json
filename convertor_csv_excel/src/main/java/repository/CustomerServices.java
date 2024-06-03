@@ -160,7 +160,7 @@ public class CustomerServices {
         if (resultSet != null) {
             while (resultSet.next()) {
                 customer = new Customer();
-                customer.setId(Long.parseLong(resultSet.getString(1)));
+                customer.setId(Integer.parseInt(resultSet.getString(1)));
                 customer.setCustomerId(Long.parseLong(resultSet.getString(2) == null ? "0" : resultSet.getString(2)));
                 customer.setCity(Integer.parseInt(resultSet.getString(3) == null ? "0" : resultSet.getString(3)));
                 customer.setName(String.valueOf(resultSet.getString(4) == null ? " " : resultSet.getString(4)));
