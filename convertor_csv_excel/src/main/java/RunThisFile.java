@@ -9,9 +9,9 @@ import reader.CsvCustomer;
  * @time: 8:10 AM
  * @mail: Abolhasany.Alireza@yahoo.com
  **/
-public class Main {
+public class RunThisFile {
 
-    final static Logger logger = Logger.getLogger(Main.class.getName());
+    final static Logger logger = Logger.getLogger(RunThisFile.class.getName());
 
     public static void main(String[] args) throws BusinessException {
        try {

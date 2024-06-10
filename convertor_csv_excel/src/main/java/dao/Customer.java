@@ -4,7 +4,10 @@ import common.MessageUtils;
 import common.exceptions.BusinessException;
 import org.apache.log4j.Logger;
 
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 /**
  * *Developer: ALireza Abolhasani
@@ -15,12 +18,18 @@ import javax.persistence.*;
 @Table(name = "customer")
 
 
-public class Customer {
+public class Customer implements Serializable {
 
     final static Logger logger = Logger.getLogger(Customer.class.getName());
     @Id
     private Integer id;
-    private Long    customerId;
+
+    @OneToMany(mappedBy = "customer")
+    private Set<Account> accounts;
+
+    @Column(nullable = false)
+    private Long  customerId;
+
     private Integer    city;
     private String name;
     private String family;

@@ -1,10 +1,13 @@
 package repository;
 
 import common.exceptions.BusinessException;
+import dao.Account;
 import dao.Customer;
+import org.hibernate.jpa.QueryHints;
 import org.junit.BeforeClass;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,15 +33,16 @@ public class ServicesInJPA {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 //*********************Type 1 SELECT
-        Customer customer = em.find(Customer.class, 80);
+        Customer customer = em.find(Customer.class, 91);
         System.out.println(customer.getFamily());
-//*********************Type 2 SELECT
-        Query q = em.createQuery("SELECT c.id from Customer c where c.id =80");
+//*********************Type 2 SELECT createQuery JPQL(MIN,MAX,ORDER BY, )
+        Query q = em.createQuery("SELECT distinct c.id from Customer c where c.id =91");
+        q.setHint(QueryHints.HINT_PASS_DISTINCT_THROUGH,false);
         List<Integer> s = q.getResultList();
         for (Integer ww : s) {
             System.out.println(ww);
         }
-//*********************type 3 SELECT
+//*********************type 3 SELECT NativeQuery
         Query query = em.createNativeQuery("select name from Customer ");
         List<String> ss = query.getResultList();
         for (String ww : ss) {
@@ -46,8 +50,8 @@ public class ServicesInJPA {
         }
 
 //*******************Type 1 Update
-        Customer customer2 = em.find(Customer.class, 85);
-        customer2.setFamily("Abdolian");
+        Customer customer2 = em.find(Customer.class, 91);
+        customer2.setFamily("Asadolahi");
         em.getTransaction().commit();
 //******************
         em.close();
@@ -56,11 +60,11 @@ public class ServicesInJPA {
         emf = Persistence.createEntityManagerFactory("easyappartment");
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        customer.setId(78);
-        customer.setName("AlijaniAsl");
-        Customer customer1 = em.merge(customer);
+        customer2 = em.find(Customer.class, 91);
+        customer2.setName("Mehdi");
+        Customer customer1 = em.merge(customer2);
         em.getTransaction().commit();
-//*******************Type 1 Insert
+//*******************Type 1 Insert Data In all DBMS
 //        EntityManagerFactory emfIns = Persistence.createEntityManagerFactory("easyappartment");
 //        EntityManager emIns = emfIns.createEntityManager();
 //        emIns.getTransaction().begin();
@@ -76,13 +80,13 @@ public class ServicesInJPA {
 //        emIns.getTransaction().commit();
 //        emIns.close();
 //        emfIns.close();
-//*******************Call Store Procedure
+//*******************Call Store Procedure We can using in all DBMS
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("easyappartment") ;
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         StoredProcedureQuery sp = entityManager.createNamedStoredProcedureQuery("gAccount1");
-        sp.setParameter("PI_ID",  String.valueOf(90));
+        sp.setParameter("PI_ID",  String.valueOf(91));
         sp.execute();
         customer = new Customer();
         Integer PO_ERROR = (Integer) sp.getOutputParameterValue("PO_ERROR");
@@ -92,17 +96,27 @@ public class ServicesInJPA {
         sp.getParameters().stream().forEach(parameter -> System.out.println(parameter.getName()));
         System.out.println(customer.getName() +"-"+customer.getFamily());
 
-//*******************Type 2 STORE PROCEDURE with result set
-      EntityManagerFactory emfSP = Persistence.createEntityManagerFactory("easyappartment") ;
-      EntityManager emSP = emfSP.createEntityManager();
-      emSP.getTransaction().begin();
-      StoredProcedureQuery spCusrsour = emSP.createNamedStoredProcedureQuery("customerList");
-      spCusrsour.execute();
-      List<Customer> cusL = (List<Customer>) spCusrsour.getResultList();
-      for (Customer cus : cusL){
-          System.out.println(cus.getName());
-      }
+//*******************Type 2 STORE PROCEDURE with result set Just for Oracle and
+//      EntityManagerFactory emfSP = Persistence.createEntityManagerFactory("easyappartment") ;
+//      EntityManager emSP = emfSP.createEntityManager();
+//      emSP.getTransaction().begin();
+//      StoredProcedureQuery spCusrsour = emSP.createNamedStoredProcedureQuery("customerList");
+//      spCusrsour.execute();
+//      List<Customer> cusL = (List<Customer>) spCusrsour.getResultList();
+//      for (Customer cus : cusL){
+//          System.out.println(cus.getName());
+//      }
 
+//*******************Type 1 remove - first find and then remove
+      EntityManagerFactory emfDel = Persistence.createEntityManagerFactory("easyappartment");
+      EntityManager emDel = emfDel.createEntityManager();
+      emDel.getTransaction().begin();
+      Customer customer3 = new Customer();
+      customer3= emDel.find(Customer.class , 91);
+      emDel.remove(customer3);
 
+      emDel.getTransaction().commit();
+      emDel.close();
+      emfDel.close();
     }
 }

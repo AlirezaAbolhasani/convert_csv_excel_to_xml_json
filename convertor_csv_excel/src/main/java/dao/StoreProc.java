@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.ResultSet;
 
 /**
  * @auteur ALireza Abolhasani
@@ -16,7 +17,7 @@ import javax.persistence.*;
 @Setter
 @Table(name="test")
 
-//*******************Type 1 STORE PROCEDURE
+//*******************Type 1 STORE PROCEDURE for JPA and mysql database and oracle
 @NamedStoredProcedureQuery(
         name = "gAccount1",
         procedureName = "gAccount1",
@@ -29,15 +30,17 @@ import javax.persistence.*;
                 @StoredProcedureParameter( name = "PO_STEP"  ,type = int.class      ,mode = ParameterMode.INOUT)
         })
 
-//*******************Type 2 STORE PROCEDURE with result set
-@NamedStoredProcedureQueries(
-@NamedStoredProcedureQuery(
-        name = "customerList",
-        procedureName = "customerList",
-        resultClasses = {Customer.class},
-        parameters = {
-                @StoredProcedureParameter( name = "customer_list_o" ,type = void.class     ,mode = ParameterMode.REF_CURSOR )
-        }))
+//*******************Type 2 STORE PROCEDURE with result set for Oracle
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "customerList",
+                procedureName = "customerList",
+                resultClasses = Customer.class,
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "customer_list_o", type = Void.class)
+
+                })})
+//Finish
 public class StoreProc {
     @Id
     private Integer PI_ID;

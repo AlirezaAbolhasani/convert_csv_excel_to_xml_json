@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dao.Customer;
 import repository.CustomerServices;
-import repository.JointingServices;
+import repository.JointingServicesForXMLSRV;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -20,30 +20,27 @@ import java.util.logging.Logger;
  * @time: 10:49 AM
  * @mail: Abolhasany.Alireza@yahoo.com
  **/
-public class XMLJson {
-    static final Logger logger = Logger.getLogger(XMLJson.class.getName());
-
-
+public class RunThisFile {
+    static final Logger logger = Logger.getLogger(RunThisFile.class.getName());
 
     public static void main(String[] args) throws ParserConfigurationException, NoSuchFieldException, TransformerException {
         try{
-            XMLJson.JSONGenerator();
-            XMLJson.XMLGeneratorCaller();
+            RunThisFile.JSONGenerator();
+            RunThisFile.XMLGeneratorCaller();
         }catch (Exception e){
             System.out.println(e.fillInStackTrace());
             logger.warning(e.getMessage());
         }
     }
 
-
     public static void JSONGenerator(){
         List<Customer> customerList = new ArrayList<>();
         String strJSON;
-        JointingServices jointingServices = new JointingServices();
+        JointingServicesForXMLSRV jointingServices = new JointingServicesForXMLSRV();
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            customerList = jointingServices.getCustomerWithASpecialBalance();
+            customerList = jointingServices.getCustomerWithASpecialBalanceHikari();
 
 //            objectMapper.writeValue(new File("output/_customerList_.json"), new Customer());
             try(FileWriter fileWriter = new FileWriter("output/_customerList_.json"))
@@ -68,11 +65,9 @@ public class XMLJson {
     }
     public static void XMLGeneratorCaller()
         throws ParserConfigurationException, NoSuchFieldException, TransformerException {
-            Customer customer = new Customer();
             List<Customer> customerList = new ArrayList<>();
             CustomerServices customerServices = new CustomerServices();
             customerList = customerServices.getAllRecordWithHikari();
-
             XMLGenerator xmlGenerator = new XMLGenerator();
             Boolean flg = xmlGenerator.XMLGenerator(customerList,"Customer");
     }

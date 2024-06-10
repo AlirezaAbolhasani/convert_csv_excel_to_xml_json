@@ -28,7 +28,7 @@ import java.util.List;
  * @mail: Abolhasany.Alireza@yahoo.com
  * In this Lib I used below reference
  * >>>> https://mkyong.com/java/how-to-create-xml-file-in-java-dom/
- **/
+ * */
 public class XMLGenerator {
     final static Logger logger = Logger.getLogger(XMLGenerator.class.getName());
 
@@ -56,11 +56,12 @@ public class XMLGenerator {
         }
 
     }
+
     /**
      * @param customerList get a list of customers for our XML file
      * @param modelName our model name in this code use for master XML tags
      * @return if our process finish successfully return true else return false
-     * ***/
+     * */
     public Boolean XMLGenerator(List<Customer> customerList,String modelName) throws NoSuchFieldException, ParserConfigurationException, TransformerException {
         Boolean flg = Boolean.TRUE;
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -116,11 +117,8 @@ public class XMLGenerator {
             cs.appendChild(customerID);
 
         }
-
-
         // print XML to system console
         //writeXml(doc, System.out);
-
         // write dom document to a file
         try (FileOutputStream output =
                      new FileOutputStream("output/customer.xml")) {

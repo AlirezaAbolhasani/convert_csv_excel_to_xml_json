@@ -8,10 +8,8 @@ import common.utility.GeneralHardCodes;
 import lombok.Data;
 import org.apache.log4j.Logger;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +22,7 @@ import java.util.regex.Pattern;
 
 @Entity
 @Table(name="account")
-public class Account {
+public class Account implements Serializable {
     final static Logger logger = Logger.getLogger(Account.class.getName());
     @Id
     private Long    id;
@@ -34,6 +32,10 @@ public class Account {
     private int     openDate;
     private double  balance;
     private short   accountLimit;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "customerId", nullable = false,referencedColumnName = "customerId",insertable = false,updatable = false)
+    private Customer customer;
 
     private int     intCustId;
     private int     extCustId;
