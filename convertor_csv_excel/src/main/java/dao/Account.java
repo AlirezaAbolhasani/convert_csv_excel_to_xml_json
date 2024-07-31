@@ -6,6 +6,7 @@ import common.MessageUtils;
 import common.exceptions.BusinessException;
 import common.utility.GeneralHardCodes;
 import lombok.Data;
+import lombok.Getter;
 import org.apache.log4j.Logger;
 
 import javax.persistence.*;
