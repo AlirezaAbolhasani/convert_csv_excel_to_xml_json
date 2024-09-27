@@ -1,5 +1,6 @@
 package Utilities;
 
+import com.sun.jdi.InterfaceType;
 import dao.Account;
 import dao.Customer;
 import org.apache.log4j.Logger;
@@ -57,6 +58,26 @@ public class XMLGenerator {
 
     }
 
+//    public static void main(String[] args) throws ParserConfigurationException, NoSuchFieldException, TransformerException {
+//        Account a = new Account();
+//        Customer c = new Customer();
+//        Boolean b =XMLGenerator.AutoXMLGenerator(a.getClass());
+//        b =XMLGenerator.AutoXMLGenerator(c.getClass());
+//    }
+
+//    public static Boolean AutoXMLGenerator(Class className) throws NoSuchFieldException, ParserConfigurationException, TransformerException {
+//        try{
+//            Class cc =Class.forName(Account);
+//            InterfaceType interfaceType = cc.
+//            for(com.sun.jdi.Field field : interfaceType.fields()){
+//                System.out.println(field.name());
+//            }
+//        }catch (Exception e){
+//            logger.warn(e.getMessage());
+//            e.printStackTrace();
+//        }
+//        return true;
+//    }
     /**
      * @param customerList get a list of customers for our XML file
      * @param modelName our model name in this code use for master XML tags
